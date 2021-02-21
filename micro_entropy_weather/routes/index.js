@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-let weather_handler = require('../controller/weatherController');
+let path = require('path');
+let weather_handler = require(path.resolve('../micro_entropy_weather/controller/weatherController'));
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Express' });
-  weather_handler.getEntropy().then((result)=>result.json()).then((result)=>res.send(result));
+    res.render('../views/index');
 });
-
+router.get('/p=:bytes', weather_handler.handleRandomNumber);
 module.exports = router;
