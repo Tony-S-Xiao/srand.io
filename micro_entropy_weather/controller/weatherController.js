@@ -1,4 +1,4 @@
-let api_keys = require('../../keys');
+let api_keys = process.env.OPEN_WEATHER_API;
 let fetch = require('node-fetch');
 const fs = require('fs/promises');
 const path = require('path');
@@ -16,7 +16,7 @@ getCities().then(val => {
 let getEntropy = (bytes) => {
     let weather = [];
     for(let i = 0; i < bytes; ++i) {
-        weather.push(fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cities[Math.floor(Math.random()*cities.length)].id}&appid=${api_keys.open_weather_api}`));
+        weather.push(fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cities[Math.floor(Math.random()*cities.length)].id}&appid=${api_keys}`));
     }
     return weather;
 };
