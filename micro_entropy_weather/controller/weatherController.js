@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 const path = require('path');
 const crypto = require('crypto');
 async function getCities() {
-    let city_list = await fs.readFile(path.resolve('../micro_entropy_weather/public/city.list.json'), 'utf8');
+    let city_list = await fs.readFile(path.join(__dirname, '../public/city.list.json'), 'utf8');
     return JSON.parse(city_list);
 }
 let cities;
