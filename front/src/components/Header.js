@@ -1,17 +1,24 @@
 import React from 'react';
-import '../Styles/Header.css'
-import Button from './Button';
-
+import { Navbar, Nav, Image, Container } from 'react-bootstrap';
+import logo from '../logo.png';
 class Header extends React.Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         return (
-            <header style={{height: this.props.height+'px'}}>
-                <Button text='wow'/>
-            </header>
+            <Navbar bg="dark" variant="dark">
+                <Navbar.Brand href="/">
+                    <Container>
+                        <Image src={logo} width='60px' height='60px'/>
+                    </Container>
+                </Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Nav.Link href="/api">API</Nav.Link>
+                    <Nav.Link href="/monitor">MONITOR</Nav.Link>
+                    <Nav.Link href="/about">ABOUT</Nav.Link>
+                </Nav>
+            </Navbar>
         );
     }
 }
