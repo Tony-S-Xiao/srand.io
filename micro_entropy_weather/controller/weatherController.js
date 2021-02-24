@@ -33,7 +33,8 @@ module.exports.handleRandomNumber = (req, res, next) => {
                     hash.update(JSON.stringify(obj),'utf8');
                     ans.push(hash.copy().digest('hex'));
                 }
-                res.send(ans);
+                res.set('Content-Type', 'text/html');
+                res.status(200).json(ans);
             });
         });
     } else 
