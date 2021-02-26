@@ -19,7 +19,6 @@ const curr_pool = new Pool({
 let query = (sql_statement, params) => {
     curr_pool.query(sql_statement, params, (err, result)=>{
         if(err) throw err;
-
     });
 };
 

@@ -7,6 +7,7 @@ require('dotenv').config();
 var app = require('../app');
 var debug = require('debug')('entropy-collector-1:server');
 var http = require('http');
+const { RequestTimeout } = require('http-errors');
 
 /**
  * Get port from environment and store in Express.
@@ -92,4 +93,5 @@ function onListening() {
 /**
  * Start polling.
  */
-require('../collectors/drand.js')();
+//require('../collectors/drand.js')();
+require('../collectors/random_org.js')(100);
