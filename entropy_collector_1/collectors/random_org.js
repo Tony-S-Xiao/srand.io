@@ -24,9 +24,9 @@ const pollRandomOrg = (delay = 3*60*1000) => { // every 3 minutes
     setTimeout(()=>{
         fetch('https://api.random.org/json-rpc/2/invoke', { method: "POST", headers: { 'Content-Type': 'application/json' }, body: body})
         .then(response=>response.json())
-        .then(result => {
-            query('insert into random_org (entropy) values ($1);', [result.result.random.data[0]]);
-            console.log(result.result.random.data[0]);
+        .then(res => {
+            query('insert into random_org (entropy) values ($1);', [res.result.random.data[0]]);
+            console.log(res.result.random.data[0]);
             pollRandomOrg(3*60*1000);
         });
     }, delay);
