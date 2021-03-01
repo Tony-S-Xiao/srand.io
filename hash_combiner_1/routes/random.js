@@ -36,6 +36,8 @@ router.get('/:num', (req, res, next) => {
     .catch(err=>{throw(err)});
 });
 
+/*
+* Used to count the ratio of zeros/total bits. 
 const zeroRatio = (input) => {
     let zeros = 0;
     let total = 0;
@@ -49,7 +51,7 @@ const zeroRatio = (input) => {
     }
     return zeros/total;
 };
-
+*/
 const hashCombine = (random_0, random_1) => {
     let sha2 = crypto.createHash('sha256');
     let sha3 = new Keccak(256);
