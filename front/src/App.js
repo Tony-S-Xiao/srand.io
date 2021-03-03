@@ -12,7 +12,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.timer = setInterval(()=>{
-      this.setState({random: Math.random()});
+      this.setState({random: Math.random().toString().padStart(64,'0')});
       /*
       fetch(host_url+'/random/1', {mode: 'cors'})
       .then(response=>response.text())
