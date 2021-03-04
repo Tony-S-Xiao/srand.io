@@ -3,6 +3,7 @@ const router = express.Router();
 const pg = require('pg');
 const hexToBinary = require('../helper/mycrypto').hexStringToBinaryString;
 const zeroRatio = require('../helper/mycrypto').zeroRatio;
+
 router.get('/', async (req, res, next) => {
     let client = new pg.Client({
         host: process.env.DB_HOST,

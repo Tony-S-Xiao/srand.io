@@ -12,6 +12,12 @@ router.get('/:num', (req, res, next) => {
         password: process.env.DB_PASS,
         port: process.env.DB_PORT
     });
+    if(!Number.isInteger(req.params.num)) {
+        res.send({error: "Must be integer."});
+    }
+    if(req.params.num <= 0 || req.params.num > 8) {
+        res.send({error: "Out of range. Must be between 1 and 8."});
+    }
     client.connect()
     .then( async ()=>{ 
         let sha2 = crypto.createHash('sha256');
@@ -33,5 +39,7 @@ router.get('/:num', (req, res, next) => {
     })
     .catch(err=>{throw(err)});
 });
-
+router.get('/', function(req, res, next) {
+    res.render('index');
+});
 module.exports = router;
