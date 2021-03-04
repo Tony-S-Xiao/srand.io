@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var randomRouter = require('./routes/random');
-
+var stats = require('./routes/stats');
 var app = express();
 
 // view engine setup
@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/stats', stats);
 app.use('/random', randomRouter);
 app.use('/', indexRouter);
 
