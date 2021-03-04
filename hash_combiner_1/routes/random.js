@@ -31,6 +31,7 @@ router.get('/:num', (req, res, next) => {
         sha2.update(result_random_org.rows[1].entropy);
         sha3.update(result_random_org.rows[0].entropy);
         sha3.update(result_random_org.rows[1].entropy);
+        client.end();
         res.send(hashCombine(sha2.digest('utf8'), sha3.digest('utf8')));
     })
     .catch(err=>{throw(err)});
