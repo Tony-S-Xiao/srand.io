@@ -5,14 +5,15 @@ const Keccak = require('sha3').Keccak;
 const crypto = require('crypto');
 const hashCombine = require('../helper/mycrypto').hashCombine;
 
+
 router.get('/:num', (req, res, next) => {
     let client = new pg.Client({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        port: process.env.DB_PORT
-    });
-    if(!Number.isInteger(req.params.num)) {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT
+});
+    if(!Number.isInteger(parseInt(req.params.num))) {
         res.send({error: "Must be integer."});
     }
     if(req.params.num <= 0 || req.params.num > 8) {

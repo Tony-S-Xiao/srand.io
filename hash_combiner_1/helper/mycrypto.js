@@ -63,4 +63,4 @@ const zeroRatio = (input) => {
     return zeros/total;
 };
 
-module.exports = {hashCombine, hexStringToBinaryString, zeroRatio};
+module.exports = {hashCombine, hexStringToBinaryString, zeroRatio, hexToBinary};
