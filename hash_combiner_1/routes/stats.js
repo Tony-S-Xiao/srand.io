@@ -43,7 +43,9 @@ router.get('/zero-runs/:hours', async (req, res, next) => {
         random_org = random_org.rows.map((val)=>val.entropy).join('');
         let drand = await client.query(`select entropy from drand where obtained >= now() - interval ${`'` + req.params.hours + ` hour'`};`);
         drand = drand.rows.map((val)=>val.entropy).join('');
-        random_org = Array.from(countLongestRunOfZeros(random_org + drand), ([key, value]) => [key, value]).sort((a, b) => a[0]-b[0]);
+        random_org = Array.from(countLongestRunOfZeros(random_org + drand), ([key, value]) => {return {runLength: key, runCount: value}});
+        random_org.sort((a, b) => a.runLength-b.runLength);
+        random_org.shift();
         client.end();
         res.send({consecZeros: random_org});
     }
