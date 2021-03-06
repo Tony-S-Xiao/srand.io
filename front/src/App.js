@@ -1,6 +1,7 @@
 import React from 'react';
 import Homepage from './components/Homepage';
 import SingleCard from './components/SingleCard'
+
 let host_url = 'http://ec2-34-222-50-125.us-west-2.compute.amazonaws.com';
 class App extends React.Component {
   constructor(props) {
