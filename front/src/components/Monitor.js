@@ -1,71 +1,44 @@
 import React from 'react';
 import Header from './Header';
-import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
-
+import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, Label } from 'recharts';
+import { Card, Jumbotron } from 'react-bootstrap';
 export default class Monitor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                {
-                  "name": "Page A",
-                  "uv": 4000,
-                  "pv": 2400
-                },
-                {
-                  "name": "Page B",
-                  "uv": 3000,
-                  "pv": 1398
-                },
-                {
-                  "name": "Page C",
-                  "uv": 2000,
-                  "pv": 9800
-                },
-                {
-                  "name": "Page D",
-                  "uv": 2780,
-                  "pv": 3908
-                },
-                {
-                  "name": "Page E",
-                  "uv": 1890,
-                  "pv": 4800
-                },
-                {
-                  "name": "Page F",
-                  "uv": 2390,
-                  "pv": 3800
-                },
-                {
-                  "name": "Page G",
-                  "uv": 3490,
-                  "pv": 4300
-                }
-              ]
+            data: []
         };
     }
     componentDidMount() {
+        console.log("mounted!");
         const url = 'http://api.srand.io/stats/zero-runs/24';
-        fetch(url, {mode: 'cors'}).then(res=>console.log(res))
+        fetch(url, {mode: 'cors'}).then(res=>res.json())
         .then((res)=>{
-            console.log(res);
+            let result = res.consecZeros.map((val, index)=>{return {consecutive: val.runLength, frequency: val.runCount}});
+            this.setState({data: result});
         });
     }
     render() {
          return (
             <div>
                 <Header ></Header>
-                <div style={{width: "1000px", margin: "auto"}}>
-                    <BarChart width={730} height={250} data={this.state.data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="pv" fill="#8884d8" />
-                    </BarChart>
-                </div>
+                <br></br>
+                <Jumbotron>
+                    <div style={{width:"1000px",margin:'auto'}}>
+                        <h1>Frequency of Consecutive Zeros</h1>
+                        <BarChart width={950} height={700} data={this.state.data}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="consecutive" >
+                                <Label value="Number of consecutive zeros" offset={0} position="insideBottom" />
+                            </XAxis>
+                            <YAxis dataKey="frequency"/>
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="frequency" fill="#8884d8" />
+                        </BarChart>                           
+                    </div>
+                </Jumbotron>
+
             </div>
           );
     }

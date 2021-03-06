@@ -2,7 +2,7 @@ import React from 'react';
 import Homepage from './components/Homepage';
 import SingleCard from './components/SingleCard'
 
-let host_url = 'http://ec2-34-222-50-125.us-west-2.compute.amazonaws.com';
+let host_url = 'http://api.srand.io';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -12,13 +12,16 @@ class App extends React.Component {
     this.timer = {};
   }
   componentDidMount() {
+    fetch(host_url+'/random/1', {mode: 'cors'})
+    .then(response=>response.json())
+    .then(result=>this.setState({random: result.randomNumber[0]}));
+    /*
     this.timer = setInterval(()=>{
-      this.setState({random: Math.random().toString().padStart(64,'0')});
-      /*
       fetch(host_url+'/random/1', {mode: 'cors'})
-      .then(response=>response.text())
-      .then(result=>this.setState({random: result}));*/
+      .then(response=>response.json())
+      .then(result=>this.setState({random: result.randomNumber[0]}))
     }, 10000);
+    */
   }
   componentWillUnmount() {
     clearTimeout(this.timer);
