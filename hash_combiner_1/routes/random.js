@@ -13,9 +13,11 @@ router.get('/:num', (req, res, next) => {
     });
     if(!Number.isInteger(parseInt(req.params.num))) {
         res.send({error: "Must be integer."});
+        return;
     }
     if(req.params.num <= 0 || req.params.num > 8) {
         res.send({error: "Out of range. Must be between 1 and 8."});
+        return;
     }
     let result = { randomNumber:[] };
     client.connect()

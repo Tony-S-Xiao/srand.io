@@ -5,27 +5,30 @@ const hexToBinary = require('../helper/mycrypto').hexStringToBinaryString;
 const zeroRatio = require('../helper/mycrypto').zeroRatio;
 const hexCharto4Binary = require('../helper/mycrypto').hexToBinary;
 
-router.get('/', async (req, res, next) => {
+router.get('/zero-percentage/:hours', async (req, res, next) => {
     let client = new pg.Client({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
         port: process.env.DB_PORT
     });
-    await client.connect();
-    let random_org = await client.query('select entropy from random_org limit 10;');
-    random_org = random_org.rows;
-    let drand = await client.query('select entropy from random_org limit 10;');
-    drand = drand.rows;
-    let total_ratio = 0;
-    for(let i = 0; i < 10; ++i) {
-        total_ratio += zeroRatio(hexToBinary(drand[i].entropy)) + zeroRatio(hexToBinary(random_org[i].entropy));
+    if(!Number.isInteger(parseInt(req.params.hours)) || req.params.hours <= 0 || req.params.hours > 24) {
+        res.send({error: "Must be an integer between 1 and 24."});
+    } else {
+        await client.connect();
+        let random_org = await client.query(`select entropy from random_org where obtained >= now() - interval ${`'` + req.params.hours + ` hour'`};`);
+        random_org = random_org.rows.map((val)=>val.entropy).join('');
+        let drand = await client.query(`select entropy from drand where obtained >= now() - interval ${`'` + req.params.hours + ` hour'`};`);
+        drand = drand.rows.map((val)=>val.entropy).join('');
+        let total_ratio = 0;
+        for(let i = 0; i < random_org.length; ++i) {
+            total_ratio += zeroRatio(hexToBinary(drand[i])) + zeroRatio(hexToBinary(random_org[i]));
+        }
+        client.end();
+        res.send({percentage: total_ratio/(2*random_org.length)});
     }
-    client.end();
-    res.send({ratio: total_ratio/20});
 });
-
-router.get('/zeroruns/:hours', async (req, res, next) => {
+router.get('/zero-runs/:hours', async (req, res, next) => {
     let client = new pg.Client({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -45,7 +48,9 @@ router.get('/zeroruns/:hours', async (req, res, next) => {
         res.send({consecZeros: random_org});
     }
 });
-
+router.get('/', function(req, res, next) {
+    res.render('index');
+});
 let countLongestRunOfZeros = (concat_hash) => {
     let hash_table = new Map();
     let curr_zero_run = 0;
@@ -66,5 +71,4 @@ let countLongestRunOfZeros = (concat_hash) => {
     //console.log(wow.join(''));
     return hash_table;
 }
-
 module.exports = router;
