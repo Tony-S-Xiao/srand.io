@@ -9,7 +9,6 @@ class Homepage extends React.Component {
     render() {
         return (
             <div> 
-                <Header style={{position:'fixed'}}/>
                 <RandomNumberDisplay random={this.props.random}></RandomNumberDisplay>
             </div>
         );

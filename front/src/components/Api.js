@@ -7,7 +7,6 @@ export default class Api extends React.Component {
     render() {
         return (
             <div>
-                <Header />
                 <Jumbotron style={{width:'1000px', margin:'auto', padding:'50px'}}>
                     <h1>HTTP API Reference</h1>
                     <p>

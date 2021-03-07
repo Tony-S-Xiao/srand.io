@@ -21,7 +21,6 @@ export default class Monitor extends React.Component {
     render() {
          return (
             <div>
-                <Header ></Header>
                 <br></br>
                 <Jumbotron>
                     <div style={{width:"1000px",margin:'auto'}}>
