@@ -13,7 +13,7 @@ router.get('/zero-percentage/:hours', async (req, res, next) => {
         port: process.env.DB_PORT
     });
     if(!Number.isInteger(parseInt(req.params.hours)) || req.params.hours <= 0 || req.params.hours > 24) {
-        res.send({error: "Must be an integer between 1 and 24."});
+        res.status(400).json({error: "Must be an integer between 1 and 24."});
     } else {
         await client.connect();
         let random_org = await client.query(`select entropy from random_org where obtained >= now() - interval ${`'` + req.params.hours + ` hour'`};`);
@@ -25,7 +25,7 @@ router.get('/zero-percentage/:hours', async (req, res, next) => {
             total_ratio += zeroRatio(hexToBinary(drand[i])) + zeroRatio(hexToBinary(random_org[i]));
         }
         client.end();
-        res.send({percentage: total_ratio/(2*random_org.length)});
+        res.json({percentage: total_ratio/(2*random_org.length)});
     }
 });
 router.get('/zero-runs/:hours', async (req, res, next) => {
@@ -36,7 +36,7 @@ router.get('/zero-runs/:hours', async (req, res, next) => {
         port: process.env.DB_PORT
     });
     if(!Number.isInteger(parseInt(req.params.hours)) || req.params.hours <= 0 || req.params.hours > 24) {
-        res.send({error: "Must be an integer between 1 and 24."});
+        res.status(400).json({error: "Must be an integer between 1 and 24."});
     } else {
         await client.connect();
         let random_org = await client.query(`select entropy from random_org where obtained >= now() - interval ${`'` + req.params.hours + ` hour'`};`);
@@ -47,11 +47,11 @@ router.get('/zero-runs/:hours', async (req, res, next) => {
         random_org.sort((a, b) => a.runLength-b.runLength);
         random_org.shift();
         client.end();
-        res.send({consecZeros: random_org});
+        res.json({consecZeros: random_org});
     }
 });
 router.get('/', function(req, res, next) {
-    res.render('index');
+    res.status(400).send({error: "Unknown call. Please check the endpoint and parameters."});
 });
 let countLongestRunOfZeros = (concat_hash) => {
     let hash_table = new Map();

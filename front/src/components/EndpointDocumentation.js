@@ -10,7 +10,7 @@ export default class EndpointDocumentation extends React.Component {
                 <h4 style={{backgroundColor: '#DCDCDC', display:'inline-block', cursor: 'pointer'}} 
                 onClick={this.props.titleClickHandle}>{this.props.endpoint}</h4>
                         <hr style={{margin: '2px'}}></hr>
-                        <p>
+                        <p style={{textAlign:"justify"}}>
                         {this.props.description}
                         </p>
                         <Parameters arguments={this.props.arguments}></Parameters>

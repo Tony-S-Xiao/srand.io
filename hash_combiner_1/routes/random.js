@@ -44,7 +44,7 @@ router.get('/:num', (req, res, next) => {
             result.randomNumber.push(hashCombine(sha2.digest('utf8'), sha3.digest('utf8')));
         }
         client.end();
-        res.send(result);
+        res.json(result);
     })
     .catch(err=>{throw(err)});
 });
@@ -55,7 +55,7 @@ let getAllUid = (rows) => {
     }
     return result;
 }
-router.get('/', function(req, res, next) {
-    res.render('index');
+router.get("/", function(req, res, next) {
+    res.status(400).json({error: "Unknown call. Please check the endpoint and parameters."});
 });
 module.exports = router;

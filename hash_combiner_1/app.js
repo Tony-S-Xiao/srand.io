@@ -24,8 +24,9 @@ app.use('/random', randomRouter);
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
+
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(createError(400));
 });
 
 // error handler
@@ -36,7 +37,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  console.log(err.status)
+  res.send({error: "Unknown call. Please check the endpoint and parameters."});
 });
 
 module.exports = app;

@@ -13,7 +13,7 @@ export default class Parameters extends React.Component {
                         return (
                         <div style={{margin:"20px"}}>
                             <p style={{display:'inline-block', width: "33%", verticalAlign:"top"}}>{val.name}</p>
-                            <p style={{display:'inline-block',  width: "67%", textAlign:'left'}}>{val.description}</p>
+                            <p style={{display:'inline-block',  width: "67%", textAlign:'justify'}}>{val.description}</p>
                         </div>
                         );
                     })
