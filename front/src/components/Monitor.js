@@ -27,8 +27,9 @@ export default class Monitor extends React.Component {
          return (
             <div>
                 <br></br>
-                <Jumbotron>
-                    <div style={{width:"1000px",margin:'auto'}}>
+                <Jumbotron style={{width:"1000px",margin:'auto'}}>
+                    <h5>Last 24 hours:</h5>
+                    <div >
                         <h1>Percentage of Zeros</h1>
                         <div style={{width:950, height:700}}>
                         <ReactSpeedometer
@@ -66,7 +67,6 @@ export default class Monitor extends React.Component {
                         </BarChart>                           
                     </div>
                 </Jumbotron>
-
             </div>
           );
     }

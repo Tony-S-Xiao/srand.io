@@ -9,7 +9,7 @@ class Header extends React.Component {
     }
     render() {
         return (
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" style={{width:Math.max(window.innerWidth, "1000px")}}>
                     <Navbar.Brand>
                         <Container>
                             <Link to='/'>

@@ -15,5 +15,4 @@ class RandomNumberDisplay extends React.Component {
         );
     }
 }
-
 export default RandomNumberDisplay;
