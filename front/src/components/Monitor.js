@@ -53,7 +53,6 @@ export default class Monitor extends React.Component {
                             fluidWidth={true}
                             />                            
                         </div>
-
                         <h1>Frequency of Consecutive Zeros</h1>
                         <BarChart width={950} height={700} data={this.state.data}>
                             <CartesianGrid strokeDasharray="3 3" />

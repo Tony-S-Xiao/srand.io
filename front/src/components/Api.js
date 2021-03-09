@@ -1,10 +1,22 @@
 import React from 'react';
-import Header from './Header';
 import {Jumbotron} from 'react-bootstrap';
 import EndpointDocumentation from './EndpointDocumentation';
 import CodeExample from './CodeExample';
 import JSONPretty from 'react-json-pretty';
 export default class Api extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    copyToClipboard(string_to_copy) {
+        let copy_text = document.getElementById('copy-helper');
+        copy_text.type = 'text';
+        copy_text.value = string_to_copy;
+        copy_text.select();
+        document.execCommand("copy");
+        copy_text.type = 'hidden';
+    };
+
     render() {
         let code_example1=`{"randomNumber":["f141853b46f5514269a4acaae9db1989b0c869e076ab166ed87f1d788b1cfcd4",
         "76b4853e40899e60ae881f9dd65625d7e85aaedae007b622b159aff8d3d4e55e",
@@ -16,7 +28,6 @@ export default class Api extends React.Component {
         {"runLength":12,"runCount":24},{"runLength":13,"runCount":11},{"runLength":14,"runCount":6},
         {"runLength":15,"runCount":4},{"runLength":16,"runCount":1},{"runLength":17,"runCount":1}]}`;
         let code_example3 =`{"percentage":0.5021410826359832}`;
-        console.log(code_example1);
         return (
             <div>
                 <Jumbotron style={{width:'1000px', margin:'auto', padding:'50px'}}>
@@ -31,7 +42,7 @@ export default class Api extends React.Component {
                     <br></br>
                     <EndpointDocumentation endpoint="/random/INTEGER" 
                     description="This method returns the desired amount of random bits in 32 byte blocks. Random bits are given in hexadecimal format."
-                    titleClickHandle={()=>alert('Not implemented.')}
+                    titleClickHandle={this.copyToClipboard}
                     arguments={[{name:'INTEGER', description: 'The number of 32 byte blocks desired. Must be an integer between 1 and 8.'}]}
                     ></EndpointDocumentation>
                     <p>
@@ -53,7 +64,7 @@ export default class Api extends React.Component {
 
                     <EndpointDocumentation endpoint="/stats/zero-percentage/INTEGER" 
                     description="This method returns the percentage of zeros in the entropy gathered in the past few hours."
-                    titleClickHandle={()=>alert('Not implemented.')}
+                    titleClickHandle={this.copyToClipboard}
                     arguments={[{name:'INTEGER', description: 'The number of hours to include. Must be an integer between 1 and 24.'}]}
                     ></EndpointDocumentation>
                     <p>
@@ -75,7 +86,7 @@ export default class Api extends React.Component {
                     <br></br>
                     <EndpointDocumentation endpoint="/stats/zero-runs/INTEGER" 
                     description="This method returns a histogram of groups of consecutive zeros and their frequency in the entropy gathered in the past few hours."
-                    titleClickHandle={()=>alert('Not implemented.')}
+                    titleClickHandle={this.copyToClipboard}
                     arguments={[{name:'INTEGER', description: 'The number of hours to include. Must be an integer between 1 and 24.'}]}
                     ></EndpointDocumentation>
                     <p>
@@ -96,8 +107,6 @@ export default class Api extends React.Component {
                         <JSONPretty id="json-pretty" data={code_example2}></JSONPretty>
                     </CodeExample>
                     <br></br>
-
-                    
                 </Jumbotron>
             </div>
             
