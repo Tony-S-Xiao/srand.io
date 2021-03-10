@@ -99,7 +99,7 @@ export default class Api extends React.Component {
                     </CodeExample>
                     <br></br>
                     <p>
-                    Response and interpretation:
+                    Response and Interpretation:
                     </p>
                     In the last 12 hours of entropy collection,
                     there were 53387 groups of consecutive zeros with a length of 1, 26883 groups of consecutive zeros with a length of 2, 13516 groups of consecutive zeros with a length of 3... etc.

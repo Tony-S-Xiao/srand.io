@@ -39,9 +39,9 @@ export default class About extends React.Component {
                 </Jumbotron>
                 <Jumbotron title="Why Aggregate Random Numbers" titlefontsize="24px" height="600px" style={{padding:"50px"}}>
                     <h1>Why Aggregate</h1>
-                    <p style={{textAlign:"justify"}}>The fundamental premise is to use the XOR operator to combine two random numbers into one random number. If any one of those random number is trustworth, 
-                        unpredictable and uniform then the final output will be as well. Srand.io aims to use take this philosophy to the extreme by aggregating as many
-                        random numbers generation methods as possible such that if any one method is trustworthy then random number given by the srand.io API will be too.
+                    <p style={{textAlign:"justify"}}>The fundamental premise is to use the XOR operator to combine two random numbers into one random number.
+                    This allows the desirable qualities of random numbers (uniforminess, unpredictability, security) to propagate to the final number. Using XOR operator
+                    is a simple and effective to thwart any attempts at an attack by an adversary or render useless a backdoor in one of the RNG algorithms. 
                     </p>
                 </Jumbotron>
             </div>

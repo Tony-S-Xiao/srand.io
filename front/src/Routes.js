@@ -1,6 +1,5 @@
 import React from 'react'
-import {BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import { Navbar, Nav, Image, Container } from 'react-bootstrap';
+import {BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App.js';
 import Monitor from './components/Monitor';
 import Api from './components/Api';

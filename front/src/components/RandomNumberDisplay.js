@@ -17,8 +17,7 @@ class RandomNumberDisplay extends React.Component {
         let renderTooltip = <i className="fa fa-copy"></i>;
         return (
             <Card body bg='secondary' text='black' style={{borderRadius: 0, height:"200px"}}>
-                <Card.Title style={{borderRadius: 0,  width:"1000px", margin:"auto", fontSize:"26px", height: "100%", padding:"60px 0"}} className="text-center">
-                    
+                <Card.Title style={{borderRadius: 0,  margin:"auto", fontSize:"26px", height: "100%", padding:"60px 0"}} className="text-center">
                     <OverlayTrigger
                         placement="right"
                         delay={{ show: 100, hide: 100 }}

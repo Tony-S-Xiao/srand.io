@@ -10,6 +10,7 @@ class Homepage extends React.Component {
         return (
             <div> 
                 <RandomNumberDisplay random={this.props.random}></RandomNumberDisplay>
+                
             </div>
         );
     }
